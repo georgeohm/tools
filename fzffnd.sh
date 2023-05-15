@@ -1,13 +1,13 @@
-location="$(find . | fzf)"
+location="$(find . -type d -not -path '*/.*' -not -path '*/node_modules*' | fzf)"
+
 if [ -z "$location" ];
 then
     echo Not Path Found
 else
-    if [ -z "$1" ] && [ "$1" == "code" ];
+    if [ "$1" == "code" ];
     then
-        code "$(pwd)/$location"
+        code $location
     else
-        echo "$(pwd)/$location"
         cd $location
     fi
 fi
